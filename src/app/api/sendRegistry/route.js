@@ -1,6 +1,7 @@
 
 import mongoose from "mongoose";
 import registermodel from "@/models/registermodel";
+import bcrypt from "bcrypt";
 
 export async function POST(request) {
   try {
@@ -18,6 +19,11 @@ export async function POST(request) {
       return Response.json({ error: "Username already exists" });
     }
 
+    // hash the password before saving to the database
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(body.password, saltRounds);
+    body.password = hashedPassword;
+    
     // Create new user
     const user = await registermodel.create(body);
     

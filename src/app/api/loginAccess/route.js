@@ -10,8 +10,8 @@ export async function POST(request){
             });
         }
        const reqbody = await request.json()
-       const {username,password} = reqbody
-       const user = await registermodel.findOne({username:username})
+       const {uid,password} = reqbody
+       const user = await registermodel.findOne({uid:uid})
             if (user){
                 // compare the password with the hashed password in the database using bcrypt
                 const isPasswordCorrect = await bcrypt.compare(password,user.password)

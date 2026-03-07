@@ -5,6 +5,7 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import CryptoJS from "crypto-js";
 
+
 const page = () => {
 
   if (Cookies.get("uid")) {
